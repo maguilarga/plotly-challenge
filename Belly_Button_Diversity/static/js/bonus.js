@@ -11,7 +11,6 @@ function buildGauge(frequecy){
   var y = radius * Math.sin(radians);
   var path1 = (degrees < 45 || degrees > 135) ? 'M -0.0 -0.025 L 0.0 0.025 L ' : 'M -0.025 -0.0 L 0.025 0.0 L ';
 
-  // Path: may have to change to create a better triangle
   var mainPath = path1,
       pathX = String(x),
       space = ' ',
@@ -104,16 +103,8 @@ function buildGauge(frequecy){
           color: '850000'
         }
       }],
-    // title: {
-    //   text: "Scrubs per Week",
-    //   font: {
-    //     size: 35,
-    //     color: "black"
-    //   },
-    //   xanchor: "center"
-    // },
-    height: 550,
-    width: 550,
+    height: 500,
+    width: 500,
     margin: { 
       t: 0, 
       b: 0 

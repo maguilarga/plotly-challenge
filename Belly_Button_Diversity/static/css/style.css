@@ -1,4 +1,14 @@
-.gauge_panel {
+.gauge_t {
     margin-bottom: 0px;
-    font-weight: bold 
+    font-weight: bold;
+    text-align: center;
+}
+.row_margin {
+    margin-bottom: 0px;
+}
+
+.ctr_chart{
+    text-align: "center";
+    margin-top: -150px;
+    margin-left: 100px;
 }

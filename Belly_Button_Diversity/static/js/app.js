@@ -59,8 +59,8 @@ function buildCharts(sample) {
     let layout1 = {
       showlegend: false,
       hovernode: "closest",
-      height: 600,
-      // width: 1200,
+      height: 500,
+      width: 1200,
       xaxis: {
         title: "OTU ID"
       }
