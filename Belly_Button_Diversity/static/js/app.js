@@ -15,66 +15,13 @@ function buildMetadata(sample) {
       mdataDiv.append("p").text(`${key}: ${value}`);
     });
 
-    // BONUS: Build the Gauge Chart
-    // Function to chart a gauge *** NOT including
-    // import { buildGauge } from './bonus.js';
+    // call Gauge chart
     buildGauge(sampleMdata.WFREQ);
 
   });
 }
 
-// function buildGauge(frequecy){
-//   // Grab a reference to the gauge div
-//   let  mdataDiv = d3.select("#gauge");
-  
-//   let trace3 =     {
-//       domain: { 
-//         x: [0, 1], 
-//         y: [0, 1],
-//         row: 10
-//       },
-//       value: frequecy,
-//       title: { 
-//         text: "Belly Button Washing Frequency",
-//         font: {
-//           size: 30
-//         }
-//        },
-//       type: "indicator",
-//       name: "MAGU",
-//       mode: "gauge",
-//       // delta: { reference: 380 },
-//       gauge: {
-//           axis: { range: [null, 10] },
-//           steps: [
-//               { range: [0, 1], color: "lightyellow"},
-//               { range: [1, 2], color: "lightgray"},
-//               { range: [2, 3], color: "lightgray"},
-//               { range: [3, 4], color: "lightgray"},
-//               { range: [4, 5], color: "lightgray"},
-//               { range: [5, 6], color: "lightgray"},
-//               { range: [6, 7], color: "lightgray"},
-//               { range: [7, 8], color: "lightgray"},
-//               { range: [8, 9], color: "green" }
-//           ]
-//       }
-//   }
-  
-//   let plot_data3 = [trace3];
-      
-//   let layout3 = { 
-//       width: 600, 
-//       height: 450, 
-//       margin: { 
-//           t: 0, 
-//           b: 0 
-//       } 
-//   };
-  
-//   Plotly.newPlot("gauge", plot_data3, layout3);
-//   }
-
-
+// Charting function. Parameter is a dictionary with sample data
 function buildCharts(sample) {
   // Grab a reference to the chart divs
   let pieChart = d3.select("#pie");
@@ -87,15 +34,13 @@ function buildCharts(sample) {
   // Build the path from which will get the data
   let url = "/samples/" + sample;
 
-  console.log(url)
-
     // Use the data to build the metadata section
   d3.json(url).then((sampleData) => {
     // Generate an array to assign color to the bubbles *** How to generate color variety
     // different traces, each with one color? how to group??
     let colorArray = Array.from({length: sampleData.otu_ids.length}, (x,i) => i);
 
-    // *** How to show x,y in the hover text
+    // define the bubble chart
     let trace1 = {
       type: "scatter",
       mode: "markers",
@@ -104,7 +49,8 @@ function buildCharts(sample) {
       text: sampleData.otu_labels,
       marker: {
         size: sampleData.sample_values,
-        color: colorArray
+        color: sampleData.otu_ids,
+        colorscale: "Earth"
       }
     };
   
@@ -122,6 +68,7 @@ function buildCharts(sample) {
 
     Plotly.newPlot("bubble", plot_data1, layout1);
 
+    // Define pie chart
     let trace2 = {
       type: "pie",
       labels: sampleData.otu_ids.slice(0,10), 
