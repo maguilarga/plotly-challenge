@@ -1,9 +1,9 @@
 function buildGauge(frequecy){
-  // Convert the frequency of wash to a number between 0 and 180
-  // degrees in a semi-circle. deterine where the needle will point 
+  // Convert the frequency of wash to a number between 0 and 180;
+  // degrees in a semi-circle. Determine where the needle will point 
   var level = ((180 * frequecy) / 9);
 
-  // Trig to calc meter point
+  // Trigonometric calculations to determine X and Y for the needle
   var degrees = 180 - level,
       radius = .5;
   var radians = degrees * Math.PI / 180;
@@ -18,6 +18,7 @@ function buildGauge(frequecy){
       pathEnd = ' Z';
   var path = mainPath.concat(pathX,space,pathY,pathEnd);
 
+  // Create trace for pie chart
   let trace3 = {
     values: [
       50/9,
@@ -73,11 +74,14 @@ function buildGauge(frequecy){
       ]
     },
     hoverinfo: "label",
+    // this will convert the pie into a donut chart
     hole: .5,
     type: "pie",
     showlegend: false
   }
 
+  // create the trace for a scatter chart with just ONE value
+  // the center in which the needle will rest
   trace4 = {
     type: 'scatter',
     x:[0],
@@ -93,7 +97,8 @@ function buildGauge(frequecy){
 }
 
   let plot_data3 = [trace3, trace4];
-      
+
+  // when specifying the layout of the gauge, paint the triangle that would be the needle
   let  layout3 = {
     shapes:[{
         type: 'path',
@@ -117,4 +122,3 @@ function buildGauge(frequecy){
   
   Plotly.newPlot("gauge", plot_data3, layout3);
 }
-

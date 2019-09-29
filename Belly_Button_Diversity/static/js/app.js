@@ -1,3 +1,4 @@
+// Display function. Parameter is a dictionary with generic data
 function buildMetadata(sample) {
   // Grab a reference to the metada div
   let  mdataDiv = d3.select("#sample-metadata");
@@ -17,7 +18,6 @@ function buildMetadata(sample) {
 
     // call Gauge chart
     buildGauge(sampleMdata.WFREQ);
-
   });
 }
 
@@ -36,9 +36,6 @@ function buildCharts(sample) {
 
     // Use the data to build the metadata section
   d3.json(url).then((sampleData) => {
-    // Generate an array to assign color to the bubbles *** How to generate color variety
-    // different traces, each with one color? how to group??
-    let colorArray = Array.from({length: sampleData.otu_ids.length}, (x,i) => i);
 
     // define the bubble chart
     let trace1 = {
@@ -101,6 +98,7 @@ function init() {
   });
 }
 
+// this function is called directly from the HTML when the sample value is selected
 function optionChanged(newSample) {
   // Fetch new data each time a new sample is selected
 
@@ -110,5 +108,3 @@ function optionChanged(newSample) {
 
 // Initialize the dashboard
 init();
-
-// *** WHY cytrl+F5. HTML will NOT load unless I kill py and reload it

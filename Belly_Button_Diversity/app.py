@@ -1,12 +1,9 @@
-# import os
+# import necessary libraries
 import pandas as pd
-# import numpy as np
-
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
-
 from flask import Flask, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 
@@ -32,12 +29,13 @@ Samples_Metadata = Base.classes.sample_metadata
 Samples = Base.classes.samples
 
 
+# main route - uploads HTML code
 @app.route("/")
 def index():
     """Return the homepage."""
     return render_template("index.html")
 
-
+# Returns: a list of "names" (number of the person that provided the sample)
 @app.route("/names")
 def names():
     """Return a list of sample names."""
@@ -49,7 +47,7 @@ def names():
     # Return a list of the column names (sample names)
     return jsonify(list(df.columns)[2:])
 
-
+# Parameter: sample number. Returns: a dictionary with general data on the person that provided the sample
 @app.route("/metadata/<sample>")
 def sample_metadata(sample):
     """Return the MetaData for a given sample."""
@@ -79,7 +77,7 @@ def sample_metadata(sample):
     print(sample_metadata)
     return jsonify(sample_metadata)
 
-
+# Parameter: sample number. returns: dictionaryof lists with sample information
 @app.route("/samples/<sample>")
 def samples(sample):
     """Return `otu_ids`, `otu_labels`,and `sample_values`."""
